@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shivam Organic – Pure. Handcrafted. Natural.</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --honey:#F4A200; --honey-dark:#C87B00; --honey-light:#FFD166;
+  --cream:#FFF8EE; --green:#2D6A4F; --green-light:#52B788; --green-pale:#D8F3DC;
+  --brown:#4A2C0A; --text:#1A1108; --white:#FFFFFF;
+  --shadow:rgba(74,44,10,0.15);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 40px;
+  background:rgba(255,248,238,0.93);
+  backdrop-filter:blur(16px);
+  border-bottom:1.5px solid rgba(244,162,0,0.18);
+  box-shadow:0 2px 24px rgba(74,44,10,0.07);
+}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--honey-dark);letter-spacing:.12em;text-decoration:none;}
+.nav-logo span{color:var(--green);}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-weight:700;font-size:.9rem;color:var(--brown);text-decoration:none;letter-spacing:.04em;transition:color .2s;}
+.nav-links a:hover{color:var(--honey);}
+.nav-cart-btn{
+  background:linear-gradient(135deg,var(--honey),var(--honey-dark));
+  color:#fff;border:none;border-radius:50px;padding:10px 22px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  box-shadow:0 4px 16px rgba(244,162,0,.35);transition:transform .2s,box-shadow .2s;
+}
+.nav-cart-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(244,162,0,.45);}
+#cartCount{
+  background:#fff;color:var(--honey-dark);border-radius:50%;
+  width:22px;height:22px;font-size:.75rem;font-weight:900;
+  display:flex;align-items:center;justify-content:center;min-width:22px;
+}
+
+/* HERO */
+#hero{
+  min-height:100vh;
+  background:linear-gradient(160deg,#FFF3D6 0%,#FFF8EE 45%,#E8F5EE 100%);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;padding-top:80px;
+}
+#heroCanvas{position:absolute;top:0;right:0;width:400px;height:100%;pointer-events:none;z-index:1;}
+
+.bee{position:absolute;width:52px;pointer-events:none;z-index:2;animation:flyBee 18s linear infinite;}
+.bee.b2{animation-duration:26s;animation-delay:-10s;top:18%;}
+.bee.b3{animation-duration:22s;animation-delay:-6s;top:65%;}
+@keyframes flyBee{
+  0%{left:-90px;transform:translateY(0) scaleX(1);}
+  49%{transform:translateY(-40px) scaleX(1);}
+  50%{left:calc(100% + 90px);transform:scaleX(-1);}
+  100%{left:-90px;transform:translateY(0) scaleX(-1);}
+}
+
+.hero-content{position:relative;z-index:3;text-align:center;animation:fadeUp 1.1s ease both;}
+.hero-badge{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--green),var(--green-light));
+  color:#fff;border-radius:50px;padding:7px 22px;
+  font-size:.82rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:22px;box-shadow:0 4px 14px rgba(45,106,79,.28);
+}
+.hero-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(4rem,10vw,9rem);color:var(--honey-dark);
+  line-height:.95;letter-spacing:.03em;
+}
+.hero-title .green{color:var(--green);}
+.hero-sub{font-weight:300;font-size:clamp(1rem,2.5vw,1.35rem);color:var(--brown);margin:18px 0 36px;letter-spacing:.03em;}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+.btn-primary{
+  background:linear-gradient(135deg,var(--honey),var(--honey-dark));
+  color:#fff;border:none;border-radius:50px;padding:15px 38px;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:1rem;
+  cursor:pointer;letter-spacing:.04em;box-shadow:0 6px 24px rgba(244,162,0,.4);
+  transition:transform .2s,box-shadow .2s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(244,162,0,.5);}
+.btn-secondary{
+  background:transparent;color:var(--green);border:2.5px solid var(--green);
+  border-radius:50px;padding:13px 36px;font-family:'Nunito',sans-serif;
+  font-weight:800;font-size:1rem;cursor:pointer;letter-spacing:.04em;
+  transition:background .2s,color .2s;text-decoration:none;display:inline-block;
+}
+.btn-secondary:hover{background:var(--green);color:#fff;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:none;}}
+
+/* STATS */
+#stats{
+  background:linear-gradient(135deg,var(--green),#1B4332);
+  padding:26px 40px;display:flex;justify-content:center;flex-wrap:wrap;
+}
+.stat-item{text-align:center;padding:12px 36px;border-right:1px solid rgba(255,255,255,.15);flex:1;min-width:130px;}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--honey-light);letter-spacing:.06em;display:block;}
+.stat-lbl{font-weight:700;font-size:.76rem;color:rgba(255,255,255,.8);letter-spacing:.1em;text-transform:uppercase;}
+
+/* ABOUT */
+#about{padding:100px 40px;background:var(--cream);position:relative;overflow:hidden;}
+.about-bg{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(244,162,0,.07) 0%,transparent 70%);top:-200px;right:-200px;pointer-events:none;}
+.section-label{font-weight:800;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,6vw,5rem);color:var(--brown);line-height:1;margin-bottom:20px;letter-spacing:.04em;}
+.section-title span{color:var(--honey-dark);}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;max-width:1100px;margin:50px auto 0;align-items:center;}
+.about-story{font-size:1.04rem;line-height:1.85;color:#4A3520;}
+.about-story p+p{margin-top:16px;}
+.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+.value-card{
+  background:#fff;border-radius:20px;padding:26px 20px;
+  box-shadow:0 4px 24px rgba(74,44,10,.09);border:1.5px solid rgba(244,162,0,.13);
+  transition:transform .25s,box-shadow .25s;
+}
+.value-card:hover{transform:translateY(-6px);box-shadow:0 12px 36px rgba(74,44,10,.15);}
+.value-icon{font-size:2rem;margin-bottom:10px;}
+.value-name{font-weight:900;font-size:1rem;color:var(--green);margin-bottom:6px;}
+.value-desc{font-size:.85rem;color:#7A6040;line-height:1.6;}
+
+/* PROCESS */
+#process{background:linear-gradient(180deg,#F5FFF9 0%,#FFF8EE 100%);padding:100px 40px;}
+.process-header{text-align:center;max-width:700px;margin:0 auto 70px;}
+.process-desc{font-size:1.02rem;color:#5A4030;line-height:1.75;margin-top:16px;}
+.process-product{max-width:1100px;margin:0 auto 90px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.process-product.rev{direction:rtl;}
+.process-product.rev>*{direction:ltr;}
+.process-media{
+  border-radius:28px;overflow:hidden;box-shadow:0 8px 40px rgba(74,44,10,.14);
+  position:relative;aspect-ratio:4/3;
+  background:linear-gradient(135deg,#FFF3D0 0%,#E8F5EE 100%);
+  display:flex;align-items:center;justify-content:center;
+}
+.process-media-icon{font-size:5rem;opacity:.45;}
+.process-media-lbl{
+  position:absolute;bottom:18px;left:18px;
+  background:rgba(255,255,255,.92);border-radius:50px;padding:7px 18px;
+  font-size:.8rem;font-weight:800;color:var(--brown);
+  backdrop-filter:blur(8px);box-shadow:0 2px 12px rgba(74,44,10,.12);
+}
+.product-tag{
+  display:inline-block;background:linear-gradient(135deg,var(--honey-light),var(--honey));
+  color:var(--brown);border-radius:50px;padding:5px 18px;
+  font-size:.78rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;
+}
+.process-product-title{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--brown);line-height:1;margin-bottom:18px;letter-spacing:.04em;}
+.process-steps{list-style:none;display:flex;flex-direction:column;gap:14px;}
+.process-step{display:flex;align-items:flex-start;gap:14px;}
+.step-num{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--honey),var(--honey-dark));
+  color:#fff;font-weight:900;font-size:.85rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;
+}
+.step-text{font-size:.95rem;line-height:1.65;color:#4A3520;}
+
+/* SHOP */
+#shop{padding:100px 40px;background:var(--cream);}
+.shop-header{text-align:center;max-width:700px;margin:0 auto 60px;}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:28px;max-width:1200px;margin:0 auto;}
+
+.product-card{
+  background:#fff;border-radius:28px;
+  box-shadow:0 6px 32px rgba(74,44,10,.10);
+  border:1.5px solid rgba(244,162,0,.12);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform .3s,box-shadow .3s;
+}
+.product-card:hover{transform:translateY(-8px);box-shadow:0 18px 48px rgba(74,44,10,.18);}
+.product-card-img{
+  width:100%;aspect-ratio:4/3;
+  background:linear-gradient(135deg,#FFF3D0 0%,#E8F5EE 100%);
+  display:flex;align-items:center;justify-content:center;font-size:4rem;
+  position:relative;overflow:hidden;
+}
+.product-card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,rgba(255,248,238,.4) 100%);}
+.card-badge{
+  position:absolute;top:14px;left:14px;z-index:1;
+  background:var(--green);color:#fff;border-radius:50px;padding:4px 14px;
+  font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.product-card-body{padding:22px 22px 18px;flex:1;display:flex;flex-direction:column;}
+.product-card-name{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--brown);letter-spacing:.05em;margin-bottom:6px;}
+.product-card-desc{font-size:.85rem;color:#7A5C30;line-height:1.6;margin-bottom:16px;flex:1;}
+.variant-label{font-size:.76rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.variant-select{
+  width:100%;padding:10px 14px;border:1.5px solid rgba(244,162,0,.35);
+  border-radius:12px;background:#FFFBF3;
+  font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;
+  color:var(--brown);cursor:pointer;appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C87B00' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  transition:border-color .2s;
+}
+.variant-select:focus{outline:none;border-color:var(--honey);}
+.size-selector{display:flex;gap:10px;margin:14px 0;}
+.size-btn{
+  flex:1;padding:8px 0;border:1.5px solid rgba(244,162,0,.35);
+  border-radius:10px;background:#FFFBF3;
+  font-family:'Nunito',sans-serif;font-weight:800;font-size:.84rem;
+  color:var(--brown);cursor:pointer;transition:all .2s;
+}
+.size-btn.active,.size-btn:hover{background:var(--honey);border-color:var(--honey);color:#fff;}
+.cart-controls{
+  display:flex;align-items:center;gap:10px;margin-top:16px;
+  padding-top:16px;border-top:1.5px solid rgba(244,162,0,.15);
+}
+.qty-btn{
+  width:36px;height:36px;border-radius:10px;
+  background:var(--green-pale);border:none;cursor:pointer;
+  font-size:1.15rem;font-weight:900;color:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  transition:background .2s,transform .15s;line-height:1;
+}
+.qty-btn:hover{background:var(--green-light);color:#fff;transform:scale(1.1);}
+.qty-trash{
+  width:36px;height:36px;border-radius:10px;background:#FFF0F0;border:none;cursor:pointer;
+  font-size:1rem;color:#E00; display:flex;align-items:center;justify-content:center;
+  transition:background .2s;
+}
+.qty-trash:hover{background:#FFD6D6;}
+.qty-num{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--brown);min-width:28px;text-align:center;}
+.live-price{margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--honey-dark);letter-spacing:.06em;}
+
+/* FLOATING CART */
+#floatingCart{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(120px);
+  z-index:2000;transition:transform .4s cubic-bezier(0.34,1.56,0.64,1);min-width:340px;
+}
+#floatingCart.visible{transform:translateX(-50%) translateY(0);}
+.fc-inner{
+  background:linear-gradient(135deg,#1B4332,#2D6A4F);border-radius:50px;padding:14px 24px;
+  display:flex;align-items:center;gap:16px;box-shadow:0 8px 40px rgba(27,67,50,.45);
+}
+.fc-icon{font-size:1.4rem;}
+.fc-label{font-weight:800;font-size:.9rem;color:#fff;flex:1;}
+.fc-total{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--honey-light);letter-spacing:.06em;}
+.fc-btn{background:var(--honey);color:#fff;border:none;border-radius:50px;padding:9px 22px;font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;cursor:pointer;transition:background .2s;}
+.fc-btn:hover{background:var(--honey-dark);}
+
+/* MODAL */
+#orderModal{display:none;position:fixed;inset:0;z-index:3000;background:rgba(26,17,8,.6);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;}
+#orderModal.open{display:flex;}
+.modal-box{background:#fff;border-radius:28px;padding:40px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(26,17,8,.3);animation:modalIn .35s cubic-bezier(0.34,1.56,0.64,1) both;position:relative;}
+@keyframes modalIn{from{transform:scale(.88) translateY(30px);opacity:0;}to{transform:scale(1) translateY(0);opacity:1;}}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--brown);letter-spacing:.05em;margin-bottom:6px;}
+.modal-sub{font-size:.9rem;color:#7A5C30;margin-bottom:28px;}
+.modal-section-title{font-size:.76rem;font-weight:800;color:var(--green);text-transform:uppercase;letter-spacing:.12em;margin:20px 0 12px;}
+.modal-input{width:100%;padding:12px 16px;border:1.5px solid rgba(244,162,0,.35);border-radius:14px;font-family:'Nunito',sans-serif;font-weight:600;font-size:.93rem;color:var(--brown);background:#FFFBF3;margin-bottom:12px;transition:border-color .2s;}
+.modal-input:focus{outline:none;border-color:var(--honey);}
+.modal-input::placeholder{color:#BFA880;}
+.order-summary{background:#FFFBF3;border-radius:16px;padding:18px;border:1.5px solid rgba(244,162,0,.2);margin-bottom:20px;}
+.order-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(244,162,0,.12);font-size:.9rem;}
+.order-row:last-child{border-bottom:none;font-weight:900;color:var(--honey-dark);font-size:1rem;}
+.payment-options{display:flex;gap:12px;margin-bottom:20px;}
+.pay-opt{flex:1;padding:14px;border:1.5px solid rgba(244,162,0,.3);border-radius:14px;text-align:center;cursor:pointer;transition:all .2s;background:#FFFBF3;}
+.pay-opt:hover,.pay-opt.selected{border-color:var(--honey);background:rgba(244,162,0,.08);}
+.pay-opt-name{font-weight:800;font-size:.9rem;color:var(--brown);margin-top:6px;}
+.pay-opt-upi{font-size:.74rem;color:#7A5C30;margin-top:3px;word-break:break-all;}
+.btn-order{width:100%;background:linear-gradient(135deg,var(--green),#1B4332);color:#fff;border:none;border-radius:50px;padding:16px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;letter-spacing:.04em;box-shadow:0 6px 24px rgba(45,106,79,.4);transition:transform .2s,box-shadow .2s;}
+.btn-order:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(45,106,79,.5);}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.8rem;cursor:pointer;color:#BFA880;}
+
+/* FOOTER */
+footer{background:linear-gradient(135deg,#1A1108,#2D1A05);color:rgba(255,255,255,.75);padding:60px 40px 30px;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:50px;max-width:1100px;margin:0 auto 50px;}
+.footer-brand{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:var(--honey);letter-spacing:.12em;margin-bottom:14px;}
+.footer-tagline{font-size:.9rem;line-height:1.7;color:rgba(255,255,255,.5);}
+.footer-heading{font-weight:800;font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;color:var(--honey-light);margin-bottom:16px;}
+.footer-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.footer-list a{color:rgba(255,255,255,.6);text-decoration:none;font-size:.9rem;transition:color .2s;}
+.footer-list a:hover{color:var(--honey);}
+.footer-bottom{max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:.82rem;color:rgba(255,255,255,.4);}
+.footer-wa{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;border-radius:50px;padding:10px 22px;font-weight:800;font-size:.9rem;text-decoration:none;transition:transform .2s;margin-top:18px;}
+.footer-wa:hover{transform:scale(1.05);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:12px 20px;}
+  .nav-links{display:none;}
+  .about-grid,.process-product,.footer-top{grid-template-columns:1fr;gap:36px;}
+  .process-product.rev{direction:ltr;}
+  #stats{gap:0;}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);min-width:50%;}
+}
+@media(max-width:600px){
+  #hero{padding:100px 20px 60px;}
+  #about,#process,#shop{padding:70px 20px;}
+  footer{padding:50px 20px 24px;}
+  .products-grid{grid-template-columns:1fr;}
+  #heroCanvas{width:200px;}
+}
+
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+.price-note{font-size:.82rem;color:#7A5C30;margin:10px 0 4px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Shivam<span>Organic</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">How We Make</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cart-btn" onclick="openOrder()">
+    🛒 Cart <span id="cartCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="heroCanvas"></canvas>
+
+  <!-- Bee 1 -->
+  <svg class="bee" style="top:35%" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="38" cy="33" rx="22" ry="14" fill="#F4A200"/>
+    <line x1="16" y1="33" x2="60" y2="33" stroke="#2D1A05" stroke-width="3"/>
+    <line x1="24" y1="27" x2="52" y2="27" stroke="#2D1A05" stroke-width="2.5"/>
+    <ellipse cx="38" cy="33" rx="12" ry="14" fill="#2D1A05" opacity="0.2"/>
+    <ellipse cx="25" cy="18" rx="14" ry="7" fill="rgba(200,240,255,0.72)" transform="rotate(-22,25,18)"/>
+    <ellipse cx="51" cy="18" rx="14" ry="7" fill="rgba(200,240,255,0.72)" transform="rotate(22,51,18)"/>
+    <circle cx="55" cy="28" r="4" fill="#2D1A05"/>
+    <circle cx="56.5" cy="26.5" r="1.5" fill="#fff" opacity="0.6"/>
+  </svg>
+  <!-- Bee 2 -->
+  <svg class="bee b2" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="38" cy="33" rx="20" ry="13" fill="#FFBE2E"/>
+    <line x1="18" y1="33" x2="58" y2="33" stroke="#2D1A05" stroke-width="2.5"/>
+    <line x1="26" y1="27" x2="50" y2="27" stroke="#2D1A05" stroke-width="2"/>
+    <ellipse cx="38" cy="33" rx="11" ry="13" fill="#2D1A05" opacity="0.18"/>
+    <ellipse cx="25" cy="18" rx="12" ry="6" fill="rgba(200,240,255,0.65)" transform="rotate(-20,25,18)"/>
+    <ellipse cx="51" cy="18" rx="12" ry="6" fill="rgba(200,240,255,0.65)" transform="rotate(20,51,18)"/>
+    <circle cx="53" cy="29" r="3.5" fill="#2D1A05"/>
+  </svg>
+  <!-- Bee 3 -->
+  <svg class="bee b3" viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="38" cy="33" rx="18" ry="11" fill="#F4A200"/>
+    <line x1="20" y1="33" x2="56" y2="33" stroke="#2D1A05" stroke-width="2"/>
+    <line x1="28" y1="28" x2="48" y2="28" stroke="#2D1A05" stroke-width="1.8"/>
+    <ellipse cx="25" cy="20" rx="11" ry="5.5" fill="rgba(200,240,255,0.6)" transform="rotate(-18,25,20)"/>
+    <ellipse cx="51" cy="20" rx="11" ry="5.5" fill="rgba(200,240,255,0.6)" transform="rotate(18,51,20)"/>
+    <circle cx="51" cy="29" r="3" fill="#2D1A05"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-badge">🍯 100% Pure &amp; Organic</div>
+    <h1 class="hero-title">SHIVAM<br><span class="green">ORGANIC</span></h1>
+    <p class="hero-sub">Pure from our farm. Handcrafted with love. Delivered to your door.</p>
+    <div class="hero-btns">
+      <a href="#shop" class="btn-primary">Shop Now 🛍️</a>
+      <a href="#about" class="btn-secondary">Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stat-item"><span class="stat-num" data-target="100">0</span><span class="stat-lbl">% Organic</span></div>
+  <div class="stat-item"><span class="stat-num" data-target="15">0</span><span class="stat-lbl">+ Products</span></div>
+  <div class="stat-item"><span class="stat-num" data-target="5">0</span><span class="stat-lbl">Honey Flavors</span></div>
+  <div class="stat-item"><span class="stat-num" data-target="10">0</span><span class="stat-lbl">Soap Varieties</span></div>
+  <div class="stat-item"><span class="stat-num" data-target="2000">0</span><span class="stat-lbl">+ Happy Customers</span></div>
+  <div class="stat-item"><span class="stat-num">🇮🇳</span><span class="stat-lbl">All India Shipping</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-bg"></div>
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-label reveal">Our Story</div>
+    <h2 class="section-title reveal">MADE WITH <span>LOVE</span><br>FROM NATURE</h2>
+    <div class="about-grid">
+      <div class="about-story reveal">
+        <p>Shivam Organic was born from a deep love of nature and a belief that the best things in life come straight from the earth. We are a small, family-run business committed to bringing you the purest organic products — grown, harvested, and handcrafted by our own hands.</p>
+        <p>From our honey bee farm where bees freely collect nectar from natural crops, to our home kitchen where we carefully blend soaps, shampoos, and oils using traditional recipes — every product carries the warmth of handmade care.</p>
+        <p>We believe that good health should be accessible to everyone. That's why our prices are kept honest, our ingredients are transparent, and our products are made fresh — never mass-produced, never compromised.</p>
+      </div>
+      <div class="values-grid reveal">
+        <div class="value-card"><div class="value-icon">🌿</div><div class="value-name">100% Natural</div><div class="value-desc">No chemicals, no additives — pure ingredients sourced from nature and our own farm.</div></div>
+        <div class="value-card"><div class="value-icon">🤲</div><div class="value-name">Handcrafted</div><div class="value-desc">Every bar, bottle, and batch is made carefully at home with traditional methods.</div></div>
+        <div class="value-card"><div class="value-icon">💰</div><div class="value-name">Affordable</div><div class="value-desc">Premium organic quality at honest, fair prices for every household in India.</div></div>
+        <div class="value-card"><div class="value-icon">🚚</div><div class="value-name">Fast Delivery</div><div class="value-desc">Order today and receive fresh products at your doorstep across all India.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE MAKE IT -->
+<section id="process">
+  <div class="process-header reveal">
+    <div class="section-label">Transparency &amp; Trust</div>
+    <h2 class="section-title">HOW WE <span>MAKE</span> IT</h2>
+    <p class="process-desc">Every product you receive is the result of careful, natural processes — from our farm and home to your hands. Here's exactly how we do it.</p>
+  </div>
+
+  <!-- Honey -->
+  <div class="process-product reveal">
+    <div class="process-media">
+      <span class="process-media-icon">🍯</span>
+      <span class="process-media-lbl">📸 Add Photo / Video</span>
+    </div>
+    <div class="process-info">
+      <span class="product-tag">🐝 Organic Honey</span>
+      <h3 class="process-product-title">FROM FARM TO BOTTLE</h3>
+      <ul class="process-steps">
+        <li class="process-step"><span class="step-num">1</span><span class="step-text">Our honey bee boxes are set up on our own farm where bees freely collect nectar from crops like fennel, suva, sesame, and more.</span></li>
+        <li class="process-step"><span class="step-num">2</span><span class="step-text">Once the honeycombs are ready, the honey is extracted by our team using a dedicated extraction machine.</span></li>
+        <li class="process-step"><span class="step-num">3</span><span class="step-text">The raw honey is carefully filtered 2–3 times through fine sieves to remove any impurities while preserving all natural goodness.</span></li>
+        <li class="process-step"><span class="step-num">4</span><span class="step-text">The pure honey is then packed into clean bottles (250g or 500g) and sealed fresh for you.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Soap -->
+  <div class="process-product rev reveal">
+    <div class="process-media">
+      <span class="process-media-icon">🧼</span>
+      <span class="process-media-lbl">📸 Add Photo / Video</span>
+    </div>
+    <div class="process-info">
+      <span class="product-tag">🌸 Organic Soap</span>
+      <h3 class="process-product-title">HANDCRAFTED AT HOME</h3>
+      <ul class="process-steps">
+        <li class="process-step"><span class="step-num">1</span><span class="step-text">We prepare a premium soap base combined with pure goat milk as the nourishing foundation.</span></li>
+        <li class="process-step"><span class="step-num">2</span><span class="step-text">Natural ingredients are added by variety — rose petals for Rose soap, kesuda flowers for Kesuda, real coffee for Coffee Tan Removal, and more.</span></li>
+        <li class="process-step"><span class="step-num">3</span><span class="step-text">The mixture is poured into unique molds to give each variety its distinctive shape.</span></li>
+        <li class="process-step"><span class="step-num">4</span><span class="step-text">Once set, every bar is carefully packaged in a box and prepared for delivery.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Shampoo -->
+  <div class="process-product reveal">
+    <div class="process-media">
+      <span class="process-media-icon">🌿</span>
+      <span class="process-media-lbl">📸 Add Photo / Video</span>
+    </div>
+    <div class="process-info">
+      <span class="product-tag">🌱 Organic Shampoo</span>
+      <h3 class="process-product-title">HERBS TO HAIR CARE</h3>
+      <ul class="process-steps">
+        <li class="process-step"><span class="step-num">1</span><span class="step-text">Different herbs are hand-collected from nearby fields and carefully sorted and cleaned at home.</span></li>
+        <li class="process-step"><span class="step-num">2</span><span class="step-text">These herbs are combined with a natural shampoo base to create a rich, organic formula.</span></li>
+        <li class="process-step"><span class="step-num">3</span><span class="step-text">The blend is mixed thoroughly to ensure even distribution of herbal goodness throughout every bottle.</span></li>
+        <li class="process-step"><span class="step-num">4</span><span class="step-text">Finally packed in 400g bottles, ready to nourish your hair naturally.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Hair Oil -->
+  <div class="process-product rev reveal">
+    <div class="process-media">
+      <span class="process-media-icon">💧</span>
+      <span class="process-media-lbl">📸 Add Photo / Video</span>
+    </div>
+    <div class="process-info">
+      <span class="product-tag">🧅 Hair Oil</span>
+      <h3 class="process-product-title">ROOTS TO RESULTS</h3>
+      <ul class="process-steps">
+        <li class="process-step"><span class="step-num">1</span><span class="step-text">Natural ingredients like onions are carefully selected and prepared at home.</span></li>
+        <li class="process-step"><span class="step-num">2</span><span class="step-text">The ingredients are blended into a carrier oil base through a slow-infusion process to extract maximum benefits.</span></li>
+        <li class="process-step"><span class="step-num">3</span><span class="step-text">Apply at night, massage gently into scalp, and wash off in the morning — stops hair fall and promotes healthy growth.</span></li>
+        <li class="process-step"><span class="step-num">4</span><span class="step-text">Packed in 100g bottles, pure and ready for daily hair care.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="shop-header reveal">
+    <div class="section-label">Fresh &amp; Organic</div>
+    <h2 class="section-title">OUR <span>PRODUCTS</span></h2>
+  </div>
+  <div class="products-grid">
+
+    <!-- HONEY -->
+    <div class="product-card reveal">
+      <div class="product-card-img" style="background:linear-gradient(135deg,#FFF3D0,#FFF8DC);">
+        🍯 <span class="card-badge">Farm Fresh</span>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">Organic Honey</div>
+        <div class="product-card-desc">Pure raw honey collected by our own bees from natural crops. 5 natural flavors available.</div>
+        <div class="variant-label">Select Flavor</div>
+        <select class="variant-select" id="honey-flavor" onchange="updateHoney()">
+          <option value="Fennel">🌿 Fennel Honey</option>
+          <option value="Suva">🌱 Suva Honey</option>
+          <option value="Rajko">🌾 Rajko Honey</option>
+          <option value="Raido">🍀 Raido Honey</option>
+          <option value="Sesame">🌻 Sesame Honey</option>
+        </select>
+        <div class="variant-label" style="margin-top:14px;">Select Size</div>
+        <div class="size-selector">
+          <button class="size-btn active" onclick="selectSize(this,100,'250g')" data-p="100">250g – ₹100</button>
+          <button class="size-btn" onclick="selectSize(this,200,'500g')" data-p="200">500g – ₹200</button>
+        </div>
+        <div class="cart-controls">
+          <button class="qty-trash" onclick="removeItem('honey')">🗑️</button>
+          <button class="qty-btn" onclick="changeQty('honey',-1)">−</button>
+          <span class="qty-num" id="qty-honey">0</span>
+          <button class="qty-btn" onclick="changeQty('honey',1)">+</button>
+          <span class="live-price" id="price-honey">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOAP -->
+    <div class="product-card reveal">
+      <div class="product-card-img" style="background:linear-gradient(135deg,#FFF0F8,#F5FFF8);">
+        🧼 <span class="card-badge" style="background:var(--green-light);">Handcrafted</span>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">Organic Soap</div>
+        <div class="product-card-desc">Made with soap base, goat milk &amp; natural ingredients. 10 unique varieties for every skin need.</div>
+        <div class="variant-label">Select Variety</div>
+        <select class="variant-select" id="soap-variety" onchange="updateSoap()">
+          <option value="Coffee Tan Removal" data-p="80">☕ Coffee Tan Removal – ₹80</option>
+          <option value="Scrub Bar" data-p="80">🌾 Scrub Bar – ₹80</option>
+          <option value="Bridal Bar" data-p="70">👰 Bridal Bar – ₹70</option>
+          <option value="Vitamin-C Bar" data-p="70">🍊 Vitamin-C Bar – ₹70</option>
+          <option value="Shahi Ubatan" data-p="70">✨ Shahi Ubatan – ₹70</option>
+          <option value="Menthol + Charcoal" data-p="70">❄️ Menthol + Charcoal – ₹70</option>
+          <option value="Kesuda Soap" data-p="60">🌸 Kesuda Soap – ₹60</option>
+          <option value="Royal Rose Bliss" data-p="50">🌹 Royal Rose Bliss – ₹50</option>
+          <option value="Neem Bar" data-p="50">🌿 Neem Bar – ₹50</option>
+          <option value="Chandan Soap" data-p="50">🪵 Chandan Soap – ₹50</option>
+        </select>
+        <div class="cart-controls">
+          <button class="qty-trash" onclick="removeItem('soap')">🗑️</button>
+          <button class="qty-btn" onclick="changeQty('soap',-1)">−</button>
+          <span class="qty-num" id="qty-soap">0</span>
+          <button class="qty-btn" onclick="changeQty('soap',1)">+</button>
+          <span class="live-price" id="price-soap">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SHAMPOO -->
+    <div class="product-card reveal">
+      <div class="product-card-img" style="background:linear-gradient(135deg,#E8F5EE,#F0FFF4);">
+        🌿 <span class="card-badge" style="background:#2D6A4F;">Herbal Blend</span>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">Organic Shampoo</div>
+        <div class="product-card-desc">Handcrafted from farm-collected herbs blended with a natural shampoo base. Available in 5 flavors. 400g bottle.</div>
+        </select>
+        <div class="price-note">Price: ₹200 / 400g bottle</div>
+        <div class="cart-controls">
+          <button class="qty-trash" onclick="removeItem('shampoo')">🗑️</button>
+          <button class="qty-btn" onclick="changeQty('shampoo',-1)">−</button>
+          <span class="qty-num" id="qty-shampoo">0</span>
+          <button class="qty-btn" onclick="changeQty('shampoo',1)">+</button>
+          <span class="live-price" id="price-shampoo">₹0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAIR OIL -->
+    <div class="product-card reveal">
+      <div class="product-card-img" style="background:linear-gradient(135deg,#FFF8DC,#FFF3D0);">
+        💧 <span class="card-badge" style="background:#C87B00;">Hair Care</span>
+      </div>
+      <div class="product-card-body">
+        <div class="product-card-name">Hair Oil</div>
+        <div class="product-card-desc">Homemade hair oil with onion &amp; natural extracts. Apply at night, wash off in the morning. Stops hair fall &amp; promotes growth.</div>
+        <div class="price-note">Price: ₹100 / 100g</div>
+        <div class="cart-controls">
+          <button class="qty-trash" onclick="removeItem('oil')">🗑️</button>
+          <button class="qty-btn" onclick="changeQty('oil',-1)">−</button>
+          <span class="qty-num" id="qty-oil">0</span>
+          <button class="qty-btn" onclick="changeQty('oil',1)">+</button>
+          <span class="live-price" id="price-oil">₹0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FLOATING CART -->
+<div id="floatingCart">
+  <div class="fc-inner">
+    <span class="fc-icon">🛒</span>
+    <div class="fc-label" id="fcLabel">0 items in cart</div>
+    <div class="fc-total" id="fcTotal">₹0</div>
+    <button class="fc-btn" onclick="openOrder()">Order Now</button>
+  </div>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="orderModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeOrder()">×</button>
+    <div class="modal-title">Place Your Order</div>
+    <div class="modal-sub">Fill in your details once — we'll send your order via WhatsApp instantly.</div>
+    <div class="modal-section-title">Delivery Details</div>
+    <input type="text" class="modal-input" id="orderName" placeholder="Your Full Name" />
+    <input type="tel" class="modal-input" id="orderPhone" placeholder="Mobile Number" />
+    <textarea class="modal-input" id="orderAddress" rows="3" placeholder="Full Address (House No., Street, City, State, PIN)" style="resize:vertical;"></textarea>
+    <div class="modal-section-title">Your Order</div>
+    <div class="order-summary" id="orderSummary"></div>
+    <div class="modal-section-title">Payment Method</div>
+    <div class="payment-options">
+      <div class="pay-opt selected" onclick="selectPay(this,'UPI')">
+        <div>💳</div>
+        <div class="pay-opt-name">UPI Payment</div>
+        <div class="pay-opt-upi">dixitchaudhary64-2@okaxis</div>
+      </div>
+      <div class="pay-opt" onclick="selectPay(this,'COD')">
+        <div>💵</div>
+        <div class="pay-opt-name">Cash on Delivery</div>
+        <div class="pay-opt-upi">Pay when you receive</div>
+      </div>
+    </div>
+    <button class="btn-order" onclick="sendWhatsApp()">📲 Send Order on WhatsApp</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Shivam Organic</div>
+      <p class="footer-tagline">Pure. Handcrafted. Affordable.<br>From our farm and home to your family — with love.</p>
+      <a href="https://wa.me/919106930746" class="footer-wa" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        +91 91069-30746
+      </a>
+    </div>
+    <div>
+      <div class="footer-heading">Products</div>
+      <ul class="footer-list">
+        <li><a href="#shop">🍯 Organic Honey</a></li>
+        <li><a href="#shop">🧼 Organic Soap</a></li>
+        <li><a href="#shop">🌿 Organic Shampoo</a></li>
+        <li><a href="#shop">💧 Hair Oil</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Explore</div>
+      <ul class="footer-list">
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#process">How We Make It</a></li>
+        <li><a href="https://wa.me/919106930746">WhatsApp Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Shivam Organic. All India Shipping.</span>
+    <span>Made with 🍯 &amp; ❤️</span>
+  </div>
+</footer>
+
+<script>
+/* HONEY DRIP CANVAS */
+(function(){
+  const canvas=document.getElementById('heroCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H;
+  function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+  resize(); window.addEventListener('resize',resize);
+  class Drip{
+    constructor(xFrac,delay){
+      this.xFrac=xFrac; this.delay=delay; this.t=delay;
+      this.speed=.35+Math.random()*.4; this.maxLen=130+Math.random()*200;
+      this.w=9+Math.random()*14; this.len=0; this.phase='grow';
+    }
+    reset(){this.len=0;this.phase='grow';this.t=this.delay+Math.random()*100;}
+    draw(){
+      const x=W*this.xFrac;
+      if(this.t>0){this.t--;return;}
+      if(this.phase==='grow'){this.len=Math.min(this.len+this.speed,this.maxLen);}
+      else{this.len-=this.speed*2;if(this.len<=0){this.reset();return;}}
+      if(this.len>=this.maxLen)this.phase='shrink';
+      const g=ctx.createLinearGradient(0,0,0,this.len);
+      g.addColorStop(0,'rgba(244,162,0,.55)');
+      g.addColorStop(1,'rgba(200,100,0,.18)');
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,this.len-this.w*.6);
+      ctx.lineWidth=this.w;ctx.strokeStyle=g;ctx.lineCap='round';ctx.stroke();
+      ctx.beginPath();ctx.arc(x,this.len,this.w*.8,0,Math.PI*2);
+      ctx.fillStyle='rgba(244,162,0,.38)';ctx.fill();
+    }
+  }
+  const drips=[new Drip(.68,20),new Drip(.82,80),new Drip(.92,150),new Drip(.75,50),new Drip(.88,110)];
+  function animate(){ctx.clearRect(0,0,W,H);drips.forEach(d=>d.draw());requestAnimationFrame(animate);}
+  animate();
+})();
+
+/* STATS COUNTER */
+const sObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-target]').forEach(el=>{
+        const tgt=+el.dataset.target;let cur=0;
+        const step=Math.ceil(tgt/40);
+        const iv=setInterval(()=>{cur=Math.min(cur+step,tgt);el.textContent=cur;if(cur>=tgt)clearInterval(iv);},40);
+      });
+      sObs.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+sObs.observe(document.getElementById('stats'));
+
+/* SCROLL REVEAL */
+const rObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');rObs.unobserve(e.target);}});
+},{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>rObs.observe(el));
+
+/* CART STATE */
+const cart={
+  honey:{qty:0,unitPrice:100,flavor:'Fennel',size:'250g'},
+  soap:{qty:0,unitPrice:80,variety:'Coffee Tan Removal'},
+  shampoo:{qty:0,unitPrice:200,flavor:'Fennel'},
+  oil:{qty:0,unitPrice:100}
+};
+
+function updateHoney(){cart.honey.flavor=document.getElementById('honey-flavor').value;refreshDisplay('honey');}
+function updateSoap(){
+  const sel=document.getElementById('soap-variety');
+  const opt=sel.options[sel.selectedIndex];
+  cart.soap.unitPrice=parseInt(opt.dataset.p);
+  cart.soap.variety=opt.value;
+  refreshDisplay('soap');
+}
+function selectSize(btn,price,size){
+  btn.closest('.size-selector').querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  cart.honey.unitPrice=price;cart.honey.size=size;
+  refreshDisplay('honey');
+}
+function changeQty(item,d){
+  cart[item].qty=Math.max(0,cart[item].qty+d);
+  refreshDisplay(item);updateCartBar();
+}
+function removeItem(item){cart[item].qty=0;refreshDisplay(item);updateCartBar();}
+function refreshDisplay(item){
+  document.getElementById('qty-'+item).textContent=cart[item].qty;
+  document.getElementById('price-'+item).textContent='₹'+(cart[item].qty*cart[item].unitPrice);
+}
+function cartTotal(){return Object.values(cart).reduce((s,c)=>s+c.qty*c.unitPrice,0);}
+function cartItems(){return Object.values(cart).reduce((s,c)=>s+c.qty,0);}
+function updateCartBar(){
+  const total=cartTotal(),items=cartItems();
+  document.getElementById('fcTotal').textContent='₹'+total;
+  document.getElementById('fcLabel').textContent=items+' item'+(items!==1?'s':'')+' in cart';
+  document.getElementById('cartCount').textContent=items;
+  document.getElementById('floatingCart').classList.toggle('visible',items>0);
+}
+
+/* ORDER */
+function openOrder(){
+  if(cartItems()===0){alert('Please add at least one item to your cart! 🛒');return;}
+  buildSummary();
+  document.getElementById('orderModal').classList.add('open');
+}
+function closeOrder(){document.getElementById('orderModal').classList.remove('open');}
+document.getElementById('orderModal').addEventListener('click',function(e){if(e.target===this)closeOrder();});
+function buildSummary(){
+  const rows=[];
+  if(cart.honey.qty>0) rows.push(`<div class="order-row"><span>Honey (${cart.honey.flavor}, ${cart.honey.size}) × ${cart.honey.qty}</span><span>₹${cart.honey.qty*cart.honey.unitPrice}</span></div>`);
+  if(cart.soap.qty>0) rows.push(`<div class="order-row"><span>Soap (${cart.soap.variety}) × ${cart.soap.qty}</span><span>₹${cart.soap.qty*cart.soap.unitPrice}</span></div>`);
+  if(cart.shampoo.qty>0){
+    const fl=document.getElementById('shampoo-flavor').value;
+    rows.push(`<div class="order-row"><span>Shampoo (${fl}) × ${cart.shampoo.qty}</span><span>₹${cart.shampoo.qty*200}</span></div>`);
+  }
+  if(cart.oil.qty>0) rows.push(`<div class="order-row"><span>Hair Oil × ${cart.oil.qty}</span><span>₹${cart.oil.qty*100}</span></div>`);
+  rows.push(`<div class="order-row"><span>Total</span><span>₹${cartTotal()}</span></div>`);
+  document.getElementById('orderSummary').innerHTML=rows.join('');
+}
+let selectedPay='UPI';
+function selectPay(el,method){
+  document.querySelectorAll('.pay-opt').forEach(e=>e.classList.remove('selected'));
+  el.classList.add('selected');selectedPay=method;
+}
+function sendWhatsApp(){
+  const name=document.getElementById('orderName').value.trim();
+  const phone=document.getElementById('orderPhone').value.trim();
+  const addr=document.getElementById('orderAddress').value.trim();
+  if(!name||!phone||!addr){alert('Please fill in your name, phone, and address.');return;}
+  const fl=document.getElementById('shampoo-flavor').value;
+  let msg=`🛍️ *NEW ORDER – Shivam Organic*\n\n*Customer:* ${name}\n*Phone:* ${phone}\n*Address:* ${addr}\n\n*Order:*\n`;
+  if(cart.honey.qty>0) msg+=`• Honey (${cart.honey.flavor}, ${cart.honey.size}) × ${cart.honey.qty} = ₹${cart.honey.qty*cart.honey.unitPrice}\n`;
+  if(cart.soap.qty>0) msg+=`• Soap (${cart.soap.variety}) × ${cart.soap.qty} = ₹${cart.soap.qty*cart.soap.unitPrice}\n`;
+  if(cart.shampoo.qty>0) msg+=`• Shampoo (${fl}) × ${cart.shampoo.qty} = ₹${cart.shampoo.qty*200}\n`;
+  if(cart.oil.qty>0) msg+=`• Hair Oil × ${cart.oil.qty} = ₹${cart.oil.qty*100}\n`;
+  msg+=`\n*Total: ₹${cartTotal()}*\n*Payment:* ${selectedPay==='UPI'?'UPI – dixitchaudhary64-2@okaxis':'Cash on Delivery'}`;
+  window.open(`https://wa.me/919106930746?text=${encodeURIComponent(msg)}`,'_blank');
+}
+</script>
+</body>
+</html>
